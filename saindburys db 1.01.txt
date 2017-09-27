@@ -1,0 +1,27 @@
+//create each table
+CREATE TABLE Products ( pID int NOT NULL PRIMARY KEY, name varchar(255) NOT NULL, buyAt NUMBER(7,2) NOT NULL, sellAt NUMBER(7,2) NOT NULL, quantity int(3) NOT NULL);
+
+CREATE TABLE Customers (cID int NOT NULL PRIMARY KEY, firstName varchar(255) NOT NULL, lastName varchar(255) NOT NULL, addressLine1 varchar(255), addressLine2 varchar(255), city varchar(255), postcode varchar(8), contactTelephone varchar(11) NOT NULL);
+
+CREATE TABLE Transactions (tID int NOT NULL PRIMARY KEY, cID int, totalValue int NOT NULL, CONSTRAINT fk_pID FOREIGN KEY (pID) REFERENCES Products(pID));
+
+//these are the sequence objects used to auto increment the primary keys
+CREATE SEQUENCE seq_product MINVALUE 0 START WITH 0 INCREMENT BY 1 CACHE 10;
+
+CREATE SEQUENCE seq_customer MINVALUE 0 START WITH 0 INCREMENT BY 1 CACHE 10;
+
+CREATE SEQUENCE seq_transactions MINVALUE 0 START WITH 0 INCREMENT BY 1 CACHE 10;
+
+//example of an insert using the sequence object
+INSERT INTO Products (pID, name, buyAt, sellAt, quantity) VALUES (seq_product.nextval, 'apple', 0.30, 0.69, 10);
+
+//example of insert into customer 
+INSERT INTO Customers (cID, firstName, lastName, addressLine1, addressLine2, city, postcode, contactTelephone) VALUES (seq_product.nextval, 'Lawrence', 'Reed', '420 
+
+//example of instert into transaction and update of products quantity
+INSERT INTO Transactions (tID, cID, pID, quantity, partOfTransaction) VALUES (seq_transactions.nextval, 1, 1, 2, 1); 
+UPDATE Products SET quantity = 2 WHERE pID = 1);
+
+
+//commit pending transactions
+COMMIT;
